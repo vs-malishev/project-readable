@@ -25,8 +25,8 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
   return {
-      categories: state.categories,
-      posts: state.posts
+      categories: state.categoriesReducer.categories,
+      posts: state.postsReducer.posts
   }
 };
 
