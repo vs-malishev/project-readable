@@ -9,10 +9,10 @@ class Navigation extends Component {
                         <a className="navbar-brand">Brand</a>
                     </div>
                     <ul className="nav navbar-nav navbar-left">
-                        <li><a href="#">Link</a></li>
-                        <li><a href="#">Link</a></li>
-                        <li><a href="#">Link</a></li>
-                        <li><a href="#">Link</a></li>
+                        <li><a href="">Link</a></li>
+                        <li><a href="">Link</a></li>
+                        <li><a href="">Link</a></li>
+                        <li><a href="">Link</a></li>
                     </ul>
                 </div>
             </nav>

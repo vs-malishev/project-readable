@@ -1,20 +1,39 @@
 import React, { Component } from 'react';
 import Navigation from './components/Navigation'
 import Listing from './components/Listing'
+import { connect } from 'react-redux';
+import { fetchFromApi } from './actions/app';
 
 class App extends Component {
-  render() {
-    return (
-        <div className="container">
-            <Navigation/>
-            <div className="row">
-                <div className="col-md-12">
-                    <Listing/>
+    componentDidMount() {
+        this.props.fetchFromApi();
+    }
+
+    render() {
+        return (
+            <div className="container">
+                <Navigation/>
+                <div className="row">
+                    <div className="col-md-12">
+                        <Listing/>
+                    </div>
                 </div>
             </div>
-        </div>
-    );
-  }
+        );
+    }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+      categories: state.categories,
+      posts: state.posts
+  }
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        fetchFromApi: () => dispatch(fetchFromApi())
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

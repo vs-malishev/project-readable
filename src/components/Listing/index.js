@@ -5,7 +5,7 @@ class Listing extends Component {
         return (
             <div className="media">
                 <div className="media-left">
-                    <a href="#">
+                    <a href="">
                        <span className="glyphicon glyphicon-thumbs-up"/>
                     </a>
                     <span className="counter">0</span>
