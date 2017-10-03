@@ -14,9 +14,7 @@ class App extends Component {
             <div className="container">
                 <Navigation { ...this.props } />
                 <div className="row">
-                    <div className="col-md-12">
-                        <Listing { ...this.props } />
-                    </div>
+                    <Listing { ...this.props } />
                 </div>
             </div>
         );
