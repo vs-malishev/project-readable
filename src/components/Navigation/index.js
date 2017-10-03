@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 class Navigation extends Component {
     render() {
+        console.log(this.props.categories);
         return (
             <nav className="navbar navbar-default">
                 <div className="container-fluid">

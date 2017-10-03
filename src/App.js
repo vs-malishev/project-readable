@@ -12,10 +12,10 @@ class App extends Component {
     render() {
         return (
             <div className="container">
-                <Navigation/>
+                <Navigation { ...this.props } />
                 <div className="row">
                     <div className="col-md-12">
-                        <Listing/>
+                        <Listing { ...this.props } />
                     </div>
                 </div>
             </div>

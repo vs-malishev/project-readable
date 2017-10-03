@@ -1,7 +1,6 @@
 import { getPosts } from "../api/apiService";
 
 export function fetchPostsSuccess(data) {
-    console.log(data);
     return {
         type: 'FETCH_POSTS_SUCCESS',
         payload: data

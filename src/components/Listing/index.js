@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 class Listing extends Component {
     render() {
+        console.log(this.props.posts);
         return (
             <div className="media">
                 <div className="media-left">
