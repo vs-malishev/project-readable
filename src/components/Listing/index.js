@@ -18,6 +18,10 @@ class Listing extends Component {
 
     };
 
+    loadComments = (id) => {
+
+    };
+
     render() {
         const { posts } = this.props;
         return (
@@ -38,7 +42,13 @@ class Listing extends Component {
                             <span>category: {post.category}</span>
                             <h4 className="media-heading"><Link to={`/posts/${post.id}`}>{post.title}</Link></h4>
                             {post.body}<br/>
-                            <span className="caption">Submitted on {this.getDate(post.timestamp)} by {post.author}</span>
+                            <p className="caption">Submitted on {this.getDate(post.timestamp)} by {post.author}</p>
+                            <p>
+                                <a
+                                    onClick={this.loadComments(post.id)}
+                                >
+                                Comments ({post.commentCount})
+                            </a></p>
                         </div>
                     </div>
                 ))
