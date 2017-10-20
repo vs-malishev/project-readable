@@ -32,8 +32,8 @@ class Listing extends Component {
                         <div className="media-left">
                             <a onClick={this.downVote(post.id)}>
                                 <span className="glyphicon glyphicon-thumbs-up"/>
-                            </a>
-                            <span className="counter">{post.voteScore}</span>
+                            </a><br/>
+                            <span className="counter">{post.voteScore}</span><br/>
                             <a onClick={this.upVote(post.id)}>
                                 <span className="glyphicon glyphicon-thumbs-down"/>
                             </a>
@@ -41,14 +41,20 @@ class Listing extends Component {
                         <div className="media-body">
                             <span>category: {post.category}</span>
                             <h4 className="media-heading"><Link to={`/posts/${post.id}`}>{post.title}</Link></h4>
-                            {post.body}<br/>
+                            <p>{post.body}</p>
                             <p className="caption">Submitted on {this.getDate(post.timestamp)} by {post.author}</p>
                             <p>
                                 <a
-                                    onClick={this.loadComments(post.id)}
+                                onClick={this.loadComments(post.id)}
                                 >
                                 Comments ({post.commentCount})
-                            </a></p>
+                                </a>
+                            </p>
+                            <p>
+                                <a> Add a comment</a> |
+                                <a> Edit</a> |
+                                <a> Delete</a>
+                            </p>
                         </div>
                     </div>
                 ))

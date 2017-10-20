@@ -16,6 +16,9 @@ class App extends Component {
                 <div className="row">
                     <Listing { ...this.props } />
                 </div>
+                <div className="row">
+                    <a className="btn btn-primary">Add New Post</a>
+                </div>
             </div>
         );
     }
