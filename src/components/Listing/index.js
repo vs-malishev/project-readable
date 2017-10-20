@@ -22,6 +22,10 @@ class Listing extends Component {
 
     };
 
+    deletePost = (id) => {
+
+    };
+
     render() {
         const { posts } = this.props;
         return (
@@ -48,12 +52,20 @@ class Listing extends Component {
                                 onClick={this.loadComments(post.id)}
                                 >
                                 Comments ({post.commentCount})
-                                </a>
+                                </a> |
+                                <a> Add</a>
                             </p>
                             <p>
-                                <a> Add a comment</a> |
-                                <a> Edit</a> |
-                                <a> Delete</a>
+                                <Link
+                                    to={`/edit/${post.id}`}
+                                >
+                                    Edit
+                                </Link> |
+                                <a
+                                    onClick={this.deletePost(post.id)}
+                                >
+                                    Delete
+                                </a>
                             </p>
                         </div>
                     </div>

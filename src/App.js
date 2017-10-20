@@ -3,6 +3,7 @@ import Navigation from './components/Navigation'
 import Listing from './components/Listing'
 import { connect } from 'react-redux';
 import { fetchFromApi } from './actions/app';
+import { Link } from 'react-router-dom';
 
 class App extends Component {
     componentDidMount() {
@@ -17,7 +18,12 @@ class App extends Component {
                     <Listing { ...this.props } />
                 </div>
                 <div className="row">
-                    <a className="btn btn-primary">Add New Post</a>
+                    <Link
+                        className="btn btn-primary"
+                        to="/edit"
+                    >
+                        Add New Post
+                    </Link>
                 </div>
             </div>
         );
