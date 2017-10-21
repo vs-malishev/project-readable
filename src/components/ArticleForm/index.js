@@ -7,7 +7,9 @@ class ArticleForm extends Component {
 
     state = {
         title: '',
-        body: ''
+        body: '',
+        author: '',
+        category: ''
     };
 
     componentDidMount() {
@@ -47,7 +49,7 @@ class ArticleForm extends Component {
     };
 
     render() {
-        console.log(this.state);
+
         return (
             <div className="row">
                 <div className="col-md-12">
@@ -71,6 +73,29 @@ class ArticleForm extends Component {
                                 value={this.state.body}
                                 onChange={this.updateValue}
                             />
+                        </div>
+                        <div className="form-group">
+                            <label>Author</label>
+                            <input
+                                type="text"
+                                name="author"
+                                className="form-control"
+                                value={this.state.author}
+                                onChange={this.updateValue}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label>Category</label>
+                            <select
+                                className="form-control"
+                                name="category"
+                                value={this.state.category}
+                                onChange={this.updateValue}
+                            >
+                                { this.props.categories && this.props.categories.map((category, index) => (
+                                    <option key={index} value={category.path}>{category.name}</option>
+                                ))}
+                            </select>
                         </div>
                         <input
                             className="btn btn-primary"
