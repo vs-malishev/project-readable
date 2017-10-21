@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { isEmpty } from 'lodash';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 class Navigation extends Component {
@@ -11,7 +12,7 @@ class Navigation extends Component {
                 <div className="container-fluid">
                     <div className="navbar-header">
                         <Link
-                            to="/posts"
+                            to="/"
                         >Brand</Link>
                     </div>
                     <ul className="nav navbar-nav navbar-left">
@@ -30,4 +31,10 @@ class Navigation extends Component {
     }
 }
 
-export default Navigation;
+const mapStateToProps = (state) => {
+    return {
+        categories: state.categoriesReducer.categories,
+    }
+};
+
+export default connect(mapStateToProps, null)(Navigation);

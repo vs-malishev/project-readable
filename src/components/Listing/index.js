@@ -2,8 +2,14 @@ import React, { Component } from 'react';
 import { isEmpty } from 'lodash';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { fetchFromApi } from '../../actions/app';
 
 class Listing extends Component {
+
+    componentDidMount() {
+        this.props.fetchFromApi();
+    }
 
     getDate = (timestamp) => {
 
@@ -27,7 +33,9 @@ class Listing extends Component {
     };
 
     render() {
-        const { posts } = this.props;
+        console.log(this.props.match);
+        const posts = !isEmpty(this.props.match.params) ? this.props.posts.filter(post => post.category === this.props.match.params.category) : this.props.posts;
+        console.log(posts);
         return (
             <div className="col-md-12">
             {!isEmpty(posts) &&
@@ -44,7 +52,7 @@ class Listing extends Component {
                         </div>
                         <div className="media-body">
                             <span>category: {post.category}</span>
-                            <h4 className="media-heading"><Link to={`/posts/${post.id}`}>{post.title}</Link></h4>
+                            <h4 className="media-heading"><Link to={`/articles/${post.id}`}>{post.title}</Link></h4>
                             <p>{post.body}</p>
                             <p className="caption">Submitted on {this.getDate(post.timestamp)} by {post.author}</p>
                             <p>
@@ -76,4 +84,16 @@ class Listing extends Component {
     }
 }
 
-export default Listing
+const mapStateToProps = (state) => {
+    return {
+        posts: state.postsReducer.posts
+    }
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        fetchFromApi: () => dispatch(fetchFromApi())
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Listing);
