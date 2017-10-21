@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import Listing from './components/Listing';
 import Navigation from './components/Navigation';
+import ArticleForm from './components/ArticleForm'
 
 class App extends Component {
 
@@ -9,7 +10,7 @@ class App extends Component {
 
         return (
             <div className="container">
-                <Navigation/>
+                <Navigation />
                 <Route
                     exact
                     path="/"
@@ -18,6 +19,15 @@ class App extends Component {
                 <Route
                     path="/category/:category"
                     component={Listing}
+                />
+                <Route
+                    exact
+                    path="/edit"
+                    component={ArticleForm}
+                />
+                <Route
+                    path="/edit/:id"
+                    component={ArticleForm}
                 />
             </div>
         );
