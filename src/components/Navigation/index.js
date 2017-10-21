@@ -17,11 +17,13 @@ class Navigation extends Component {
                     </div>
                     <ul className="nav navbar-nav navbar-left">
                         {!isEmpty(categories) &&
-                        categories.map((category) => (
-                            <li>
+                        categories.map((category, index) => (
+                            <li key={ index }>
                                 <Link
                                     to={`/category/${category.path}`}
-                                >{category.name}</Link>
+                                >
+                                    {category.name}
+                                </Link>
                             </li>
                         ))}
                     </ul>
