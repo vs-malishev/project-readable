@@ -19,7 +19,8 @@ export const postArticle = (body) => fetch('/posts', {
     headers: {
         ...headers,
         'Content-Type': 'application/json'
-    },body: JSON.stringify(body)
+    },
+    body: JSON.stringify(body)
 });
 
 export const putArticle = (body) => fetch(`/posts/${body.id}`, {
@@ -27,5 +28,6 @@ export const putArticle = (body) => fetch(`/posts/${body.id}`, {
     headers: {
         ...headers,
         'Content-Type': 'application/json'
-    },body: JSON.stringify(body)
+    },
+    body: JSON.stringify(body)
 });

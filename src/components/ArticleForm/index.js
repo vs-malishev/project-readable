@@ -49,9 +49,9 @@ class ArticleForm extends Component {
         event.preventDefault();
         if (this.state.id) {
             this.props.patchArticle(this.state);
+        } else {
+            this.props.postArticle(this.state);
         }
-
-        this.props.postArticle(this.state);
     };
 
     render() {
