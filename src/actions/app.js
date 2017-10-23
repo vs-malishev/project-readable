@@ -1,5 +1,5 @@
 import { fetchCategories } from './categories';
-import { fetchPosts } from './posts';
+import { fetchArticles } from './articles';
 import { apiLoadingAction, apiErrorAction, apiSuccessAction } from './api';
 
 export function fetchFromApi() {
@@ -7,7 +7,7 @@ export function fetchFromApi() {
         dispatch(apiLoadingAction());
         Promise.all([
             fetchCategories(dispatch),
-            fetchPosts(dispatch)
+            fetchArticles(dispatch)
         ])
             .then(() => {
                 dispatch(apiSuccessAction());

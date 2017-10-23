@@ -8,6 +8,16 @@ export default function postsReducer(state = initialState, action) {
             return {
                 posts: action.payload
             };
+
+        case 'POST_ARTICLE_SUCCESS':
+            return {
+                state
+            };
+
+        case 'PATCH_ARTICLE_SUCCESS':
+            return {
+                state
+            };
         default:
             return state;
     }

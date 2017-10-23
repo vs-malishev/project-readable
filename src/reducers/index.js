@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
 import apiStatusReducer from './apistatus'
-import postsReducer from './posts'
+import postsReducer from './articles'
 import categoriesReducer from './categories'
 import commentsReducer from './comments'
 

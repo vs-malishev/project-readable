@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { isEmpty, find } from 'lodash';
 import { connect } from 'react-redux';
-import {fetchFromApi} from "../../actions/app";
+import { fetchFromApi } from "../../actions/app";
+import { updateArticle, createArticle } from "../../actions/articles";
 
 class ArticleForm extends Component {
 
@@ -46,6 +47,11 @@ class ArticleForm extends Component {
 
     postArticle = (event) => {
         event.preventDefault();
+        if (this.state.id) {
+            this.props.patchArticle(this.state);
+        }
+
+        this.props.postArticle(this.state);
     };
 
     render() {
@@ -118,7 +124,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchFromApi : () => dispatch(fetchFromApi())
+        fetchFromApi: () => dispatch(fetchFromApi()),
+        postArticle: (data) => dispatch(createArticle(data)),
+        patchArticle: (data) => dispatch(updateArticle(data))
     };
 };
 
