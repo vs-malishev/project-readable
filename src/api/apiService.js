@@ -1,4 +1,4 @@
-const api = "http://localhost:3001";
+const api = "http://127.0.0.1:3001";
 
 let token = localStorage.token;
 if (!token) {
@@ -14,7 +14,7 @@ export const getCategories = () => fetch(`${api}/categories`, { headers });
 
 export const getArticles = () => fetch(`${api}/posts`, { headers });
 
-export const postArticle = (body) => fetch('/posts', {
+export const postArticle = (body) => fetch(`${api}/posts`, {
     method: 'POST',
     headers: {
         ...headers,
@@ -23,7 +23,7 @@ export const postArticle = (body) => fetch('/posts', {
     body: JSON.stringify(body)
 });
 
-export const putArticle = (body) => fetch(`/posts/${body.id}`, {
+export const putArticle = (body, id) => fetch(`${api}/posts/${id}`, {
     method: 'PUT',
     headers: {
         ...headers,

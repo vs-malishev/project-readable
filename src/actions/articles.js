@@ -17,7 +17,7 @@ export function postArticleSuccess(data) {
 
 export function patchArticleSuccess(data) {
     return {
-        type: 'PATCH_ARTICLE_SUCCESS',
+        type: 'PUT_ARTICLE_SUCCESS',
         payload: data
     };
 }
@@ -28,11 +28,26 @@ export function fetchArticles(dispatch) {
         .then(data => { dispatch(fetchPostsSuccess(data))});
 }
 
-export function createArticle() {
+export function createArticle(data) {
+    const date = new Date().getTime();
+    const generateUUID = (d) => {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+            const r = (d + Math.random()*16)%16 | 0;
+            d = Math.floor(d/16);
+            return (c==='x' ? r : (r&0x3|0x8)).toString(16);
+        });
+    };
+    const id = generateUUID(date);
+    const payload = {
+        ...data,
+        id: id,
+        timestamp: date
+    };
+
     return (dispatch) => {
         dispatch(apiLoadingAction());
 
-        postArticle(dispatch)
+        postArticle(payload)
             .then(res => res.json())
             .then(data => {
                 dispatch(postArticleSuccess(data))
@@ -41,12 +56,11 @@ export function createArticle() {
     };
 }
 
-export function updateArticle(data) {
-    console.log(data);
+export function updateArticle(data, id) {
     return (dispatch) => {
         dispatch(apiLoadingAction());
 
-        putArticle(data)
+        putArticle(data, id)
             .then(res => res.json())
             .then(data => {
                 dispatch(patchArticleSuccess(data))
