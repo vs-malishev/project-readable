@@ -28,7 +28,7 @@ export function fetchArticles(dispatch) {
         .then(data => { dispatch(fetchPostsSuccess(data))});
 }
 
-export function createArticle(data) {
+export function createArticle(data, history) {
     const date = new Date().getTime();
     const generateUUID = (d) => {
         return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
@@ -50,20 +50,22 @@ export function createArticle(data) {
         postArticle(payload)
             .then(res => res.json())
             .then(data => {
-                dispatch(postArticleSuccess(data))
+                dispatch(postArticleSuccess(data));
+                history.push('/')
             })
             .catch(message => dispatch(apiErrorAction(message)));
     };
 }
 
-export function updateArticle(data, id) {
+export function updateArticle(data, id, history) {
     return (dispatch) => {
         dispatch(apiLoadingAction());
 
         putArticle(data, id)
             .then(res => res.json())
             .then(data => {
-                dispatch(patchArticleSuccess(data))
+                dispatch(patchArticleSuccess(data));
+                history.push('/')
             })
             .catch(message => dispatch(apiErrorAction(message)));
     };

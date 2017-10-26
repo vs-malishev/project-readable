@@ -47,14 +47,12 @@ class ArticleForm extends Component {
 
     postArticle = (event) => {
         event.preventDefault();
-        
-        if (this.state.id) {
-            this.props.putArticle(this.state, this.state.id);
-        } else {
-            this.props.postArticle(this.state);
-        }
 
-        this.props.history.push('/')
+        if (this.state.id) {
+            this.props.putArticle(this.state, this.state.id, this.props.history);
+        } else {
+            this.props.postArticle(this.state, this.props.history);
+        }
     };
 
     render() {
@@ -122,15 +120,15 @@ const mapStateToProps = (state) => {
     return {
         posts: state.postsReducer.posts,
         categories: state.categoriesReducer.categories,
-        isLoading: state.apiStatusReducer.isLoading
+        isLoading: state.apiStatusReducer.isLoading,
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchFromApi: () => dispatch(fetchFromApi()),
-        postArticle: (data) => dispatch(createArticle(data)),
-        putArticle: (data, id) => dispatch(updateArticle(data, id))
+        postArticle: (data, history) => dispatch(createArticle(data, history)),
+        putArticle: (data, id, history) => dispatch(updateArticle(data, id, history))
     };
 };
 
