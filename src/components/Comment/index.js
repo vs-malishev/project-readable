@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class Comment extends Component {
+class Comments extends Component {
     render() {
         return (
             <div>Comment</div>
