@@ -47,11 +47,14 @@ class ArticleForm extends Component {
 
     postArticle = (event) => {
         event.preventDefault();
+        
         if (this.state.id) {
             this.props.putArticle(this.state, this.state.id);
         } else {
             this.props.postArticle(this.state);
         }
+
+        this.props.history.push('/')
     };
 
     render() {
