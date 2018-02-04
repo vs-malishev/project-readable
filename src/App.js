@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import Listing from './components/Listing';
+import Article from './components/Article';
 import Navigation from './components/Navigation';
 import ArticleForm from './components/ArticleForm'
 
@@ -19,6 +20,10 @@ class App extends Component {
                 <Route
                     path="/category/:category"
                     component={Listing}
+                />
+                <Route
+                    path="/articles/:id"
+                    component={Article}
                 />
                 <Route
                     exact

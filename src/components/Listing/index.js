@@ -32,8 +32,8 @@ class Listing extends Component {
                 }
                 <div className="col-md-12">
                         <Link
-                    className="btn btn-primary"
-                    to="/edit"
+                            className="btn btn-primary"
+                            to="/edit"
                         >
                         Create Post
                     </Link>
