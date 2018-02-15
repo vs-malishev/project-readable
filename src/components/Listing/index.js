@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { isEmpty } from 'lodash';
+import { isEmpty, orderBy } from 'lodash';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchFromApi } from '../../actions/app';
@@ -47,7 +47,7 @@ class Listing extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        posts: state.postsReducer.posts
+        posts: orderBy(state.postsReducer.posts, 'timestamp')
     }
 };
 
