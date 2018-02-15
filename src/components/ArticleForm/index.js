@@ -48,14 +48,22 @@ class ArticleForm extends Component {
     postArticle = (event) => {
         event.preventDefault();
 
+        const payload = {
+            ...this.state,
+            category: this.state.category !== 'choose category' ? this.state.category : null
+        };
+
         if (this.state.id) {
-            this.props.putArticle(this.state, this.state.id, this.props.history);
+            this.props.putArticle(payload, this.state.id, this.props.history);
         } else {
-            this.props.postArticle(this.state, this.props.history);
+            this.props.postArticle(payload, this.props.history);
         }
     };
 
     render() {
+        console.log(this.state);
+
+        const { categories} = this.props;
 
         return (
             <div className="row">
@@ -74,7 +82,6 @@ class ArticleForm extends Component {
                         <div className="form-group">
                             <label>Body</label>
                             <textarea
-                                type="text"
                                 name="body"
                                 className="form-control"
                                 value={this.state.body}
@@ -96,11 +103,14 @@ class ArticleForm extends Component {
                             <select
                                 className="form-control"
                                 name="category"
-                                value={this.state.category.path}
+                                value={this.state.category}
                                 onChange={this.updateValue}
                             >
-                                { this.props.categories && this.props.categories.map((category, index) => (
-                                    <option key={index} value={category.path}>{category.name}</option>
+                                {categories.length && categories.map(category => category.path).map((category, index) => (
+                                    <option
+                                        key={index}
+                                        value={category}
+                                    >{category}</option>
                                 ))}
                             </select>
                         </div>
@@ -117,6 +127,7 @@ class ArticleForm extends Component {
 }
 
 const mapStateToProps = (state) => {
+
     return {
         posts: state.postsReducer.posts,
         categories: state.categoriesReducer.categories,

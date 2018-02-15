@@ -58,7 +58,7 @@ export function createArticle(data, history) {
             .then(res => res.json())
             .then(data => {
                 dispatch(postArticleSuccess(data));
-                history.push('/')
+                history.goBack();
             })
             .catch(message => dispatch(apiErrorAction(message)));
     };
@@ -72,7 +72,7 @@ export function updateArticle(data, id, history) {
             .then(res => res.json())
             .then(data => {
                 dispatch(patchArticleSuccess(data));
-                history.push('/')
+                history.goBack();
             })
             .catch(message => dispatch(apiErrorAction(message)));
     };

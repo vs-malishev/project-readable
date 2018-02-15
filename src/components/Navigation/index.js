@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 class Navigation extends Component {
     render() {
-        const { categories } = this.props;
+        const categories  = this.props.categories.filter(category => category.path);
 
         return (
             <nav className="navbar navbar-default">
