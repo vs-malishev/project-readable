@@ -9,19 +9,19 @@ class Item extends Component {
         return moment.unix(timestamp).format('MMM DD, hh:mmA').toString();
     };
 
-    upVote = (id) => {
+    upVote = () => {
+        this.props.submitVote(this.props.post.id, 'upVote');
+    };
+
+    downVote = () => {
+        this.props.submitVote(this.props.post.id, 'downVote');
+    };
+
+    loadComments = () => {
 
     };
 
-    downVote = (id) => {
-
-    };
-
-    loadComments = (id) => {
-
-    };
-
-    deletePost = (id) => {
+    deletePost = () => {
 
     };
 
@@ -33,11 +33,11 @@ class Item extends Component {
                 {post &&
                 <div className="media" key={post.id}>
                     <div className="media-left">
-                        <a onClick={this.downVote(post.id)}>
+                        <a onClick={this.upVote}>
                             <span className="glyphicon glyphicon-thumbs-up"/>
                         </a><br/>
                         <span className="counter">{post.voteScore}</span><br/>
-                        <a onClick={this.upVote(post.id)}>
+                        <a onClick={this.downVote}>
                             <span className="glyphicon glyphicon-thumbs-down"/>
                         </a>
                     </div>

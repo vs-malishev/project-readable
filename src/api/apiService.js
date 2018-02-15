@@ -23,6 +23,15 @@ export const postArticle = (body) => fetch(`${api}/posts`, {
     body: JSON.stringify(body)
 });
 
+export const postVote = (id, body) => fetch(`${api}/posts/${id}`, {
+    method: 'POST',
+    headers: {
+        ...headers,
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(body)
+});
+
 export const putArticle = (body, id) => fetch(`${api}/posts/${id}`, {
     method: 'PUT',
     headers: {

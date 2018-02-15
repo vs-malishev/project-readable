@@ -3,6 +3,7 @@ import { isEmpty } from 'lodash';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchFromApi } from '../../actions/app';
+import { postArticleVote } from "../../actions/articles";
 import Item from './item';
 
 class Listing extends Component {
@@ -27,6 +28,7 @@ class Listing extends Component {
                     posts.filter((post) => !post.deleted).map((post) => (
                         <Item
                             post={post}
+                            submitVote={this.props.submitVote}
                         />
                     ))
                 }
@@ -51,7 +53,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchFromApi: () => dispatch(fetchFromApi())
+        fetchFromApi: () => dispatch(fetchFromApi()),
+        submitVote: (id, count) => dispatch(postArticleVote(id, count))
     };
 };
 

@@ -5,8 +5,6 @@ const initialState = {
 };
 
 export default function postsReducer(state = initialState, action) {
-    let articleData;
-    let articles;
 
     switch (action.type) {
         case 'FETCH_POSTS_SUCCESS':
@@ -15,20 +13,21 @@ export default function postsReducer(state = initialState, action) {
             };
 
         case 'POST_ARTICLE_SUCCESS':
-            articleData = action.payload;
-            articles = state.posts;
-
-            articles.unshift(articleData);
 
             return {
-                posts: articles
+                posts: [...state.posts, action.payload]
+            };
+
+        case 'POST_ARTICLE_VOTE_SUCCESS':
+
+            return {
+                posts: unionBy([action.payload], state.posts, 'id')
             };
 
         case 'PUT_ARTICLE_SUCCESS':
-            articleData = [action.payload];
 
             return {
-                posts: unionBy(articleData, state.posts, 'id')
+                posts: unionBy([action.payload], state.posts, 'id')
             };
 
         default:

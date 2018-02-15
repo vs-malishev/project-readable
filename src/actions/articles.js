@@ -1,4 +1,4 @@
-import { getArticles, postArticle, putArticle } from "../api/apiService";
+import { getArticles, postArticle, putArticle, postVote } from "../api/apiService";
 import { apiLoadingAction, apiErrorAction, apiSuccessAction } from './api';
 
 export function fetchPostsSuccess(data) {
@@ -11,6 +11,13 @@ export function fetchPostsSuccess(data) {
 export function postArticleSuccess(data) {
     return {
         type: 'POST_ARTICLE_SUCCESS',
+        payload: data
+    };
+}
+
+export function postArticleVoteSuccess(data) {
+    return {
+        type: 'POST_ARTICLE_VOTE_SUCCESS',
         payload: data
     };
 }
@@ -66,6 +73,24 @@ export function updateArticle(data, id, history) {
             .then(data => {
                 dispatch(patchArticleSuccess(data));
                 history.push('/')
+            })
+            .catch(message => dispatch(apiErrorAction(message)));
+    };
+}
+
+export function postArticleVote(id, count) {
+
+    const payload = {
+        option: count
+    };
+
+    return (dispatch) => {
+        dispatch(apiLoadingAction());
+
+        postVote(id, payload)
+            .then(res => res.json())
+            .then(data => {
+                dispatch(postArticleVoteSuccess(data));
             })
             .catch(message => dispatch(apiErrorAction(message)));
     };
