@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 
-class Comments extends Component {
+class Comment extends Component {
     render() {
+        const { comment } = this.props;
+
+        console.log(comment);
+
         return (
-            <div>Comment</div>
+            <div>{comment.body}</div>
         )
     }
 }

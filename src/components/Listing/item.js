@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Comments from '../Comment'
+import Comment from '../Comment'
 import moment from 'moment';
+import { isEmpty } from 'lodash';
 
 class Item extends Component {
 
@@ -18,7 +19,7 @@ class Item extends Component {
     };
 
     loadComments = () => {
-
+        this.props.loadComments(this.props.post.id);
     };
 
     deletePost = () => {
@@ -27,6 +28,8 @@ class Item extends Component {
 
     render() {
         const post = this.props.post;
+        const comments = this.props.comments[post.id];
+
 
         return (
             <div className="col-md-12">
@@ -47,7 +50,7 @@ class Item extends Component {
                         <p>{post.body}</p>
                         <p className="caption">Submitted on {this.getDate(post.timestamp)} by {post.author}</p>
                         <p>
-                            <a onClick={this.loadComments(post.id)}>
+                            <a onClick={this.loadComments}>
                                 Comments ({post.commentCount})
                             </a> |
                             <a> Add</a>
@@ -56,13 +59,15 @@ class Item extends Component {
                             <Link to={`/edit/${post.id}`}>
                                 Edit
                             </Link> |
-                            <a onClick={this.deletePost(post.id)}>
+                            <a onClick={this.deletePost}>
                                 Delete
                             </a>
                         </p>
-                        {post.coummentCount &&
-                        <Comments comments={this.props.comments} />
-                        }
+                        {comments && comments.map(comment =>
+                            <Comment
+                                comment={comment}
+                            />
+                        )}
                     </div>
                 </div>
                 }

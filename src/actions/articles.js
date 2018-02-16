@@ -32,7 +32,8 @@ export function patchArticleSuccess(data) {
 export function fetchArticles(dispatch) {
     return getArticles()
         .then(res => res.json())
-        .then(data => { dispatch(fetchPostsSuccess(data))});
+        .then(data => { dispatch(fetchPostsSuccess(data))})
+        .catch(message => dispatch(apiErrorAction(message)));
 }
 
 export function createArticle(data, history) {

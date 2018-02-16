@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchFromApi } from '../../actions/app';
 import { postArticleVote } from "../../actions/articles";
+import { fetchComments } from "../../actions/comments";
 import Item from './item';
 
 class Listing extends Component {
@@ -52,6 +53,8 @@ class Listing extends Component {
                         <Item
                             post={post}
                             submitVote={this.props.submitVote}
+                            comments={this.props.comments}
+                            loadComments={this.props.loadComments}
                         />
                     ))
                 }
@@ -70,14 +73,16 @@ class Listing extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        posts: state.postsReducer.posts
+        posts: state.postsReducer.posts,
+        comments: state.commentsReducer.comments
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchFromApi: () => dispatch(fetchFromApi()),
-        submitVote: (id, count) => dispatch(postArticleVote(id, count))
+        submitVote: (id, count) => dispatch(postArticleVote(id, count)),
+        loadComments: (id) => dispatch(fetchComments(id))
     };
 };
 

@@ -14,7 +14,7 @@ export const getCategories = () => fetch(`${api}/categories`, { headers });
 
 export const getArticles = () => fetch(`${api}/posts`, { headers });
 
-export const getComments = (id) => fetch(`${api}/comments/${id}`, { headers });
+export const getComments = (id) => fetch(`${api}/posts/${id}/comments/`, { headers });
 
 export const postArticle = (body) => fetch(`${api}/posts`, {
     method: 'POST',
