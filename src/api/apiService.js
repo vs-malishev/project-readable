@@ -14,6 +14,8 @@ export const getCategories = () => fetch(`${api}/categories`, { headers });
 
 export const getArticles = () => fetch(`${api}/posts`, { headers });
 
+export const getComments = (id) => fetch(`${api}/comments/${id}`, { headers });
+
 export const postArticle = (body) => fetch(`${api}/posts`, {
     method: 'POST',
     headers: {
@@ -30,6 +32,29 @@ export const postVote = (id, body) => fetch(`${api}/posts/${id}`, {
         'Content-Type': 'application/json'
     },
     body: JSON.stringify(body)
+});
+
+export const postComment = (body) => fetch(`${api}/comments`, {
+   method: 'POST',
+    headers: {
+        ...headers,
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(body)
+});
+
+export const putComment = (body) => fetch(`${api}/comments`, {
+    method: 'PUT',
+    headers: {
+        ...headers,
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(body)
+});
+
+export const deleteComment = (id) => fetch(`${api}/comments/${id}`, {
+    method: 'DELETE',
+    headers
 });
 
 export const putArticle = (body, id) => fetch(`${api}/posts/${id}`, {
