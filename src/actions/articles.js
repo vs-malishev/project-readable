@@ -1,4 +1,4 @@
-import { getArticles, postArticle, putArticle, postVote } from "../api/apiService";
+import { getArticles, postArticle, putArticle, postVote, deleteArticle } from "../api/apiService";
 import { apiLoadingAction, apiErrorAction, apiSuccessAction } from './api';
 
 export function fetchPostsSuccess(data) {
@@ -25,6 +25,13 @@ export function postArticleVoteSuccess(data) {
 export function patchArticleSuccess(data) {
     return {
         type: 'PUT_ARTICLE_SUCCESS',
+        payload: data
+    };
+}
+
+export function deleteArticleSuccess(data) {
+    return {
+        type: 'DELETE_ARTICLE_SUCCESS',
         payload: data
     };
 }
@@ -78,6 +85,18 @@ export function updateArticle(data, id, history) {
             .catch(message => dispatch(apiErrorAction(message)));
     };
 }
+
+export const removeArticle = (id, history) => (dispatch) => {
+    dispatch(apiLoadingAction());
+
+    deleteArticle(id)
+        .then(res => res.json())
+        .then(data => {
+            dispatch(deleteArticleSuccess(data));
+            history.push('/');
+        })
+        .catch(message => dispatch(apiErrorAction(message)));
+};
 
 export function postArticleVote(id, count) {
 

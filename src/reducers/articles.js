@@ -30,6 +30,12 @@ export default function postsReducer(state = initialState, action) {
                 posts: unionBy([action.payload], state.posts, 'id')
             };
 
+        case 'DELETE_ARTICLE_SUCCESS':
+
+            return {
+                posts: unionBy([action.payload], state.posts, 'id')
+            };
+
         default:
             return state;
     }

@@ -25,6 +25,20 @@ export const postArticle = (body) => fetch(`${api}/posts`, {
     body: JSON.stringify(body)
 });
 
+export const putArticle = (body, id) => fetch(`${api}/posts/${id}`, {
+    method: 'PUT',
+    headers: {
+        ...headers,
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(body)
+});
+
+export const deleteArticle = (id) => fetch(`${api}/posts/${id}`, {
+    method: 'DELETE',
+    headers
+});
+
 export const postVote = (id, body) => fetch(`${api}/posts/${id}`, {
     method: 'POST',
     headers: {
@@ -55,13 +69,4 @@ export const putComment = (body) => fetch(`${api}/comments`, {
 export const deleteComment = (id) => fetch(`${api}/comments/${id}`, {
     method: 'DELETE',
     headers
-});
-
-export const putArticle = (body, id) => fetch(`${api}/posts/${id}`, {
-    method: 'PUT',
-    headers: {
-        ...headers,
-        'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(body)
 });

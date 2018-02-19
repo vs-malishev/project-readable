@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import { isEmpty, orderBy } from 'lodash';
+import { isEmpty, orderBy, filter } from 'lodash';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchFromApi } from '../../actions/app';
-import { postArticleVote } from "../../actions/articles";
-import { fetchComments } from "../../actions/comments";
 import Item from './item';
+import {removeArticle} from "../../actions/articles";
 
 class Listing extends Component {
     state = {
@@ -70,13 +69,14 @@ class Listing extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        posts: state.postsReducer.posts,
+        posts: filter(state.postsReducer.posts, { 'deleted': false })
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchFromApi: () => dispatch(fetchFromApi()),
+
     };
 };
 

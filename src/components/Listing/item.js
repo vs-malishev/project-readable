@@ -5,8 +5,8 @@ import moment from 'moment';
 import { connect } from 'react-redux';
 import { isEmpty } from 'lodash';
 import CommentForm from "../Comment/commentForm";
-import {fetchComments} from "../../actions/comments";
-import {postArticleVote} from "../../actions/articles";
+import { fetchComments } from "../../actions/comments";
+import { postArticleVote, removeArticle } from "../../actions/articles";
 
 class Item extends Component {
 
@@ -37,8 +37,8 @@ class Item extends Component {
         });
     };
 
-    deletePost = () => {
-
+    deleteArticle = () => {
+        this.props.deleteArticle(this.props.post.id, this.props.history);
     };
 
     showCommentForm = () => {
@@ -92,7 +92,7 @@ class Item extends Component {
                             </Link> |
                             <a
                                 href={'#'}
-                                onClick={this.deletePost}>
+                                onClick={this.deleteArticle}>
                                 Delete
                             </a>
                         </p>
@@ -119,6 +119,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         loadComments: (id) => dispatch(fetchComments(id)),
         submitVote: (id, count) => dispatch(postArticleVote(id, count)),
+        deleteArticle: (id, history) => dispatch(removeArticle(id, history))
     };
 };
 
