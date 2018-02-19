@@ -86,6 +86,11 @@ class Item extends Component {
                             postComment={this.postComment}
                         />
                         }
+                        {comments && this.state.toggleComments && comments.map(comment =>
+                            <Comment
+                                comment={comment}
+                            />
+                        )}
                         <p>
                             <Link to={`/edit/${post.id}`}>
                                 Edit
@@ -96,11 +101,6 @@ class Item extends Component {
                                 Delete
                             </a>
                         </p>
-                        {comments && this.state.toggleComments && comments.map(comment =>
-                            <Comment
-                                comment={comment}
-                            />
-                        )}
                     </div>
                 </div>
                 }

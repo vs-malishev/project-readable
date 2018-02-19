@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import { isEmpty, orderBy, filter } from 'lodash';
+import { isEmpty, orderBy } from 'lodash';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchFromApi } from '../../actions/app';
 import Item from './item';
-import {removeArticle} from "../../actions/articles";
 
 class Listing extends Component {
     state = {
@@ -16,14 +15,16 @@ class Listing extends Component {
         this.props.fetchFromApi();
     }
 
-    orderListingsBy = (order) => {
+    orderListingsBy = (orderBy) => {
           this.setState({
-              orderBy: order
+              orderBy
           });
     };
 
     render() {
-        const posts = orderBy(!isEmpty(this.props.match.params) ? this.props.posts.filter(post => post.category === this.props.match.params.category) : this.props.posts, this.state.orderBy, 'desc');
+        const posts = orderBy(!isEmpty(this.props.match.params)
+            ? this.props.posts.filter(post => post.category === this.props.match.params.category)
+            : this.props.posts, this.state.orderBy, 'desc');
 
         return (
             <div className="row">
@@ -69,7 +70,7 @@ class Listing extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        posts: filter(state.postsReducer.posts, { 'deleted': false })
+        posts: state.postsReducer.posts
     }
 };
 
