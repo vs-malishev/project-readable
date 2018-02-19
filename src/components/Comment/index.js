@@ -1,9 +1,16 @@
 import React, { Component } from 'react';
+import CommentForm from './commentForm';
 
 class Comment extends Component {
 
-    editComment = () => {
+    state = {
+        toggleCommentForm: false
+    };
 
+    editComment = () => {
+        this.setState({
+            toggleCommentForm: !this.state.toggleCommentForm
+        })
     };
 
     deleteComment = () => {
@@ -12,6 +19,15 @@ class Comment extends Component {
 
     render() {
         const { comment } = this.props;
+
+        if (this.state.toggleCommentForm) {
+            return(
+                <CommentForm
+                    comment={comment}
+                    postComment={this.postComment}
+                />
+            );
+        }
 
         return (
             <div className={'col-md-12'}>
