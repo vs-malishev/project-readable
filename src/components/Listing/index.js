@@ -52,9 +52,6 @@ class Listing extends Component {
                     posts.filter((post) => !post.deleted).map((post) => (
                         <Item
                             post={post}
-                            submitVote={this.props.submitVote}
-                            comments={this.props.comments}
-                            loadComments={this.props.loadComments}
                         />
                     ))
                 }
@@ -74,15 +71,12 @@ class Listing extends Component {
 const mapStateToProps = (state) => {
     return {
         posts: state.postsReducer.posts,
-        comments: state.commentsReducer.comments
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchFromApi: () => dispatch(fetchFromApi()),
-        submitVote: (id, count) => dispatch(postArticleVote(id, count)),
-        loadComments: (id) => dispatch(fetchComments(id))
     };
 };
 
