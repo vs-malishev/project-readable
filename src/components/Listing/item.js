@@ -11,7 +11,8 @@ import {postArticleVote} from "../../actions/articles";
 class Item extends Component {
 
     state = {
-        showCommentsForm: false
+        showCommentsForm: false,
+        toggleComments: false
     };
 
     getDate = (timestamp) => {
@@ -27,7 +28,13 @@ class Item extends Component {
     };
 
     loadComments = () => {
-        this.props.loadComments(this.props.post.id);
+        if (!this.props.comments[this.props.post.id]) {
+            this.props.loadComments(this.props.post.id);
+        }
+
+        this.setState({
+           toggleComments: !this.state.toggleComments
+        });
     };
 
     deletePost = () => {
@@ -47,11 +54,15 @@ class Item extends Component {
                 {post &&
                 <div className="media" key={post.id}>
                     <div className="media-left">
-                        <a onClick={this.upVote}>
+                        <a
+                            href={'#'}
+                            onClick={this.upVote}>
                             <span className="glyphicon glyphicon-thumbs-up"/>
                         </a><br/>
                         <span className="counter">{post.voteScore}</span><br/>
-                        <a onClick={this.downVote}>
+                        <a
+                            href={'#'}
+                            onClick={this.downVote}>
                             <span className="glyphicon glyphicon-thumbs-down"/>
                         </a>
                     </div>
@@ -61,10 +72,14 @@ class Item extends Component {
                         <p>{post.body}</p>
                         <p className="caption">Submitted on {this.getDate(post.timestamp)} by {post.author}</p>
                         <p>
-                            <a onClick={this.loadComments}>
+                            <a
+                                href={'#'}
+                                onClick={this.loadComments}>
                                 Comments ({post.commentCount})
                             </a> |
-                            <a onClick={this.showCommentForm}> Add</a>
+                            <a
+                                href={'#'}
+                                onClick={this.showCommentForm}> Add</a>
                         </p>
                         {this.state.showCommentsForm &&
                         <CommentForm
@@ -75,11 +90,13 @@ class Item extends Component {
                             <Link to={`/edit/${post.id}`}>
                                 Edit
                             </Link> |
-                            <a onClick={this.deletePost}>
+                            <a
+                                href={'#'}
+                                onClick={this.deletePost}>
                                 Delete
                             </a>
                         </p>
-                        {comments && comments.map(comment =>
+                        {comments && this.state.toggleComments && comments.map(comment =>
                             <Comment
                                 comment={comment}
                             />

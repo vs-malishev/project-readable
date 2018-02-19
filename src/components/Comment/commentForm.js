@@ -3,7 +3,8 @@ import React, { Component } from 'react'
 class CommentForm extends Component {
 
     state = {
-        body: ''
+        body: '',
+        author: ''
     };
 
     updateValue = (event) => {
@@ -16,10 +17,16 @@ class CommentForm extends Component {
         });
     };
 
+    postComment = (event) => {
+        event.preventDefault();
+
+        this.props.postComment(this.state);
+    };
+
     render() {
         return(
             <div className={'col-md-12'}>
-                <form onSubmit={this.props.postComment}>
+                <form onSubmit={this.postComment}>
                     <div className="form-group">
                         <label>Body</label>
                         <textarea
